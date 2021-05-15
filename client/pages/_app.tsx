@@ -3,6 +3,7 @@ import { AppProps } from 'next/dist/next-server/lib/router/router';
 import buildClient from '../api/build-client';
 import { AppContextType } from 'next/dist/next-server/lib/utils';
 import { CurrentUser } from '../interfaces';
+import Header from '../components/header';
 
 const AppComponent = ({
   Component,
@@ -11,7 +12,7 @@ const AppComponent = ({
 }: AppProps & CurrentUser) => {
   return (
     <div>
-      <h1>Header {currentUser.email}</h1>
+      <Header currentUser={currentUser} />
       <Component {...pageProps} />
     </div>
   );

@@ -7,8 +7,8 @@ interface ErrorResponse {
 }
 
 interface requestBody {
-  email: string;
-  password: string;
+  email?: string;
+  password?: string;
 }
 
 interface useRequestProps {
