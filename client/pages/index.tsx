@@ -1,11 +1,8 @@
 import { NextPage } from 'next';
 import buildClient from '../api/build-client';
+import { CurrentUser } from '../interfaces';
 
-interface LandingPageProps {
-  currentUser: string;
-}
-
-const LandingPage: NextPage<LandingPageProps> = ({ currentUser }) => {
+const LandingPage: NextPage<CurrentUser> = ({ currentUser }) => {
   return currentUser ? (
     <h1>You are signed in</h1>
   ) : (

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { NextPageContext } from 'next';
 
-export default ({ req }: NextPageContext) => {
+const buildClient = ({ req }: NextPageContext) => {
   if (typeof window === 'undefined') {
     // SERVICENAME.NAMESPACE
     return axios.create({
@@ -15,3 +15,5 @@ export default ({ req }: NextPageContext) => {
     });
   }
 };
+
+export default buildClient;
