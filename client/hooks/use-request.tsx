@@ -15,15 +15,20 @@ interface useRequestProps {
   url: string;
   method: Method;
   body: requestBody;
+  onSuccess?: (data: AxiosResponse<any>) => void;
 }
 
-const useRequest = ({ url, method, body }: useRequestProps) => {
+const useRequest = ({ url, method, body, onSuccess }: useRequestProps) => {
   const [errors, setErrors] = useState<JSX.Element>(null);
 
   const doRequest = async () => {
     try {
       setErrors(null);
       const response: AxiosResponse<any> = await axios[method](url, body);
+
+      if (onSuccess) {
+        onSuccess(response.data);
+      }
 
       return response.data;
     } catch (err) {
