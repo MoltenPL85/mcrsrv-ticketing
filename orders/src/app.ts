@@ -2,6 +2,10 @@ import express, { json } from 'express';
 import 'express-async-errors';
 import cookieSession from 'cookie-session';
 import { currentUser, errorHandler, NotFoundError } from '@mbtickets/common';
+import { newOrderRouter } from './routes/new';
+import { indexOrderRouter } from './routes';
+import { showOrderRouter } from './routes/show';
+import { deleteOrderRouter } from './routes/delete';
 
 const app = express();
 app.set('trust proxy', true);
@@ -13,6 +17,11 @@ app.use(
   })
 );
 app.use(currentUser);
+
+app.use(newOrderRouter);
+app.use(indexOrderRouter);
+app.use(showOrderRouter);
+app.use(deleteOrderRouter);
 
 app.all('*', () => {
   throw new NotFoundError();
