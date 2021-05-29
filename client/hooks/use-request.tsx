@@ -16,7 +16,14 @@ interface RequestBodyNewTicket {
   price: string;
 }
 
-type requestBody = RequestBodyCredentials | RequestBodyNewTicket;
+interface RequestBodyPurchaseTicket {
+  ticketId: string;
+}
+
+type requestBody =
+  | RequestBodyCredentials
+  | RequestBodyNewTicket
+  | RequestBodyPurchaseTicket;
 
 interface useRequestProps {
   url: string;

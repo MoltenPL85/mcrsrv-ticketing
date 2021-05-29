@@ -28,11 +28,12 @@ AppComponent.getInitialProps = async (appContext: AppContextType) => {
 
   let pageProps = {};
   if (appContext.Component.getInitialProps) {
-    pageProps = await appContext.Component.getInitialProps(appContext.ctx);
-    // @ts-ignore
-    pageProps.client = client;
-    // @ts-ignore
-    pageProps.currentUser = data.currentUser;
+    pageProps = await appContext.Component.getInitialProps(
+      appContext.ctx,
+      // @ts-ignore
+      client,
+      data.currentUser
+    );
   }
 
   return { pageProps, ...data };
