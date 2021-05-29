@@ -1,8 +1,11 @@
-import { NextPage } from 'next';
-import buildClient from '../api/build-client';
 import { CurrentUser } from '../interfaces';
 
-const LandingPage: NextPage<CurrentUser> = ({ currentUser }) => {
+interface LandingPageProps {
+  currentUser: CurrentUser;
+  // client: AxiosInstance
+}
+
+const LandingPage = ({ currentUser }) => {
   return currentUser ? (
     <h1>You are signed in</h1>
   ) : (
@@ -11,10 +14,7 @@ const LandingPage: NextPage<CurrentUser> = ({ currentUser }) => {
 };
 
 LandingPage.getInitialProps = async (context) => {
-  const client = buildClient(context);
-  const { data } = await client.get('/api/users/currentuser');
-
-  return data;
+  return {};
 };
 
 export default LandingPage;

@@ -6,10 +6,17 @@ interface ErrorResponse {
   field: 'email' | 'password';
 }
 
-interface requestBody {
-  email?: string;
-  password?: string;
+interface RequestBodyCredentials {
+  email: string;
+  password: string;
 }
+
+interface RequestBodyNewTicket {
+  title: string;
+  price: string;
+}
+
+type requestBody = RequestBodyCredentials | RequestBodyNewTicket;
 
 interface useRequestProps {
   url: string;
@@ -24,6 +31,7 @@ const useRequest = ({ url, method, body, onSuccess }: useRequestProps) => {
   const doRequest = async () => {
     try {
       setErrors(null);
+
       const response: AxiosResponse<any> = await axios[method](url, body);
 
       if (onSuccess) {

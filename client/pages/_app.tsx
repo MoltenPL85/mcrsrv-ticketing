@@ -1,9 +1,9 @@
 import 'bootstrap/dist/css/bootstrap.css';
 import { AppProps } from 'next/dist/next-server/lib/router/router';
 import buildClient from '../api/build-client';
-import { AppContextType } from 'next/dist/next-server/lib/utils';
 import { CurrentUser } from '../interfaces';
 import Header from '../components/header';
+import { AppContextType } from 'next/dist/next-server/lib/utils';
 
 const AppComponent = ({
   Component,
@@ -13,7 +13,9 @@ const AppComponent = ({
   return (
     <div>
       <Header currentUser={currentUser} />
-      <Component {...pageProps} />
+      <div className="container">
+        <Component currentUser={currentUser} {...pageProps} />
+      </div>
     </div>
   );
 };
@@ -27,6 +29,10 @@ AppComponent.getInitialProps = async (appContext: AppContextType) => {
   let pageProps = {};
   if (appContext.Component.getInitialProps) {
     pageProps = await appContext.Component.getInitialProps(appContext.ctx);
+    // @ts-ignore
+    pageProps.client = client;
+    // @ts-ignore
+    pageProps.currentUser = data.currentUser;
   }
 
   return { pageProps, ...data };
